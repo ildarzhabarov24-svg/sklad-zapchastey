@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сайт переехал</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0F1629;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 520px;
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 48px 40px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F1629;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #5A6480;
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .old-address {
+      font-size: 14px;
+      color: #8E97B0;
+      background: #F7F8FC;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-family: monospace;
+    }
+
+    .new-address {
+      font-size: 18px;
+      font-weight: 600;
+      color: #4F46E5;
+      background: #EEF2FF;
+      padding: 10px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .new-address a {
+      color: #4F46E5;
+      text-decoration: none;
+    }
+
+    .new-address a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #4F46E5;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 40px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    }
+
+    .btn:hover {
+      background: #4338CA;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .redirect-info {
+      font-size: 13px;
+      color: #8E97B0;
+      margin-top: 20px;
+    }
+
+    .redirect-info span {
+      font-weight: 600;
+      color: #0F1629;
+    }
+
+    .footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #F0F2F8;
+      font-size: 12px;
+      color: #B0B8CC;
+    }
+
+    /* Тёмная тема — адаптация под системную */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0D0F14;
+      }
+      .container {
+        background: #1A1D24;
+      }
+      h1 {
+        color: #E8EAEF;
+      }
+      .subtitle {
+        color: #9DA3B4;
+      }
+      .old-address {
+        background: #22262E;
+        color: #6B7280;
+      }
+      .new-address {
+        background: rgba(79, 70, 229, 0.15);
+        color: #818CF8;
+      }
+      .new-address a {
+        color: #818CF8;
+      }
+      .redirect-info {
+        color: #6B7280;
+      }
+      .redirect-info span {
+        color: #E8EAEF;
+      }
+      .footer {
+        border-top-color: #2E323C;
+        color: #4A4F5E;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <span class="icon">🚚</span>
+
+  <h1>Мы переехали!</h1>
+
+  <p class="subtitle">
+    Сайт «Цифровой гараж» теперь доступен по новому адресу.<br>
+    Все данные сохранены, ничего не потеряно.
+  </p>
+
+  <div class="old-address">
+    ⚡ старый адрес: ildarzhabarov24-svg.github.io
+  </div>
+
+  <div class="new-address">
+    🏠 <a href="https://cifrovoigarazh.ru/" target="_blank">cifrovoigarazh.ru</a>
+  </div>
+
+  <a href="https://cifrovoigarazh.ru/" class="btn" id="redirectBtn">
+    Перейти на новый сайт →
+  </a>
+
+  <p class="redirect-info">
+    Автоматический переход через <span id="countdown">10</span> секунд
+  </p>
+
+  <div class="footer">
+    Цифровой гараж — управление складом и транспортом
+  </div>
+</div>
+
+<script>
+  (function() {
+    const NEW_URL = 'https://cifrovoigarazh.ru/';
+    let seconds = 10;
+    const countdownEl = document.getElementById('countdown');
+
+    // Обновляем счётчик каждую секунду
+    const timer = setInterval(function() {
+      seconds--;
+      if (countdownEl) {
+        countdownEl.textContent = seconds;
+      }
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = NEW_URL;
+      }
+    }, 1000);
+
+    // Кнопка — прерываем таймер и переходим сразу
+    document.getElementById('redirectBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      clearInterval(timer);
+      window.location.href = NEW_URL;
+    });
+
+    // Если пользователь нажал на ссылку с новым адресом — пусть открывается в этой же вкладке
+    document.querySelector('.new-address a').addEventListener('click', function(e) {
+      e.preventDefault();
+      clearInterval(timer);
+      window.location.href = NEW_URL;
+    });
+  })();
+</script>
+
+</body>
+</html>
